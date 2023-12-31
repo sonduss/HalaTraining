@@ -1,0 +1,23 @@
+package selenium.chrome;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+public class GitHubHomePage {
+
+    public static void main(String[] args) {
+    
+    }
+    private WebDriver driver;
+    private final String signInUrl = "https://github.com/login"; // Replace with the actual sign-in URL
+
+
+    public GitHubHomePage(WebDriver driver) {
+        this.driver = driver;
+    }
+
+    public GitHubSignInPage navigateToSignIn() {
+        driver.findElement(By.linkText("signInUrl")).click();
+        return new GitHubSignInPage(driver);
+    }
+}

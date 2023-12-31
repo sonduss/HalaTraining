@@ -1,38 +1,41 @@
 package selenium.chrome;
 
-import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.junit.Assert;
+import org.testng.Assert;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
+
+import selenium.chrome.GitHubHomePage;
+import selenium.chrome.GitHubSignInPage;
+import utilities.DataReader;
+import utilities.DriverFactory;
 
 public class AppTest {
 
-    @Test
-    public void testGoogleSearch() {
-        // Set up WebDriver (using the same setup as in the main code)
-    	System.setProperty("webdriver.chrome.driver", "C:\\Users\\MASS\\eclipse-workspace\\chrome\\chromedriver.exe");
-        WebDriver driver = new ChromeDriver();
+    @DataProvider(name = "testData")
+    public Object[][] provideTestData() {
+        DataReader reader = new DataReader("path/to/your/google/sheet"); // Replace with actual path
+        return reader.readTestData();
+    }
 
-        try {
-            // Navigate to Google
-            driver.get("https://www.google.com");
+    @Test(dataProvider = "testData")
+    public void testSignIn(String testCaseId, String username, String password, boolean expectedResult) {
+        WebDriver driver = DriverFactory.createDriver("chrome"); // Replace with desired browser
 
-            // Perform search actions
-            WebElement searchBox = driver.findElement(By.name("q"));
-            searchBox.click();
-            searchBox.sendKeys("Selenium Tutorials");
-            searchBox.sendKeys(Keys.ENTER);
+        GitHubHomePage homePage = new GitHubHomePage(driver);
+        GitHubSignInPage signInPage = homePage.navigateToSignIn();
 
-            // Validate the title
-            String expectedTitle = "Selenium Tutorials - Google Search";
-            String actualTitle = driver.getTitle();
-            Assert.assertEquals(expectedTitle, actualTitle);
-        } finally {
-            // Close the browser
-            driver.quit();
+        signInPage.signIn(username, password);
+
+        // Assert sign-in results
+        if (expectedResult) {
+            Assert.assertTrue(signInPage.isSignInSuccessful(), "Sign-in failed unexpectedly.");
+        } else {
+            Assert.assertFalse(signInPage.isSignInSuccessful(), "Sign-in succeeded unexpectedly.");
+            Assert.assertEquals(signInPage.getErrorMessage(), "Incorrect username or password."); // Assuming this is the expected error message
         }
+
+        // Close the browser
+        driver.quit();
     }
 }
