@@ -12,19 +12,19 @@ public class DriverFactory {
 
         switch (browser.toLowerCase()) {
             case "chrome":
-                System.setProperty("webdriver.chrome.driver", "C:\\Users\\MASS\\eclipse-workspace\\chrome\\chromedriver.exe"); // Replace with your ChromeDriver path
+                System.setProperty("webdriver.chrome.driver", "C:\\Users\\MASS\\eclipse-workspace\\chrome\\chromedriver.exe"); 
                 driver = new ChromeDriver();
                 break;
             case "firefox":
-                System.setProperty("webdriver.gecko.driver", "C:\\Users\\MASS\\eclipse-workspace\\chrome\\firefoxdriver.exe"); // Replace with your GeckoDriver path
+                System.setProperty("webdriver.gecko.driver", "C:\\Users\\MASS\\eclipse-workspace\\chrome\\firefoxdriver.exe"); 
                 driver = new FirefoxDriver();
                 break;
             case "edge":
-                System.setProperty("webdriver.edge.driver", "C:\\Users\\MASS\\eclipse-workspace\\chrome\\edgedriver.exe"); // Replace with your EdgeDriver path
+                System.setProperty("webdriver.edge.driver", "C:\\Users\\MASS\\eclipse-workspace\\chrome\\edgedriver.exe"); 
                 driver = new EdgeDriver();
                 break;
             default:
-                driver = new ChromeDriver(); // Default to Chrome if browser is not specified
+                driver = new ChromeDriver(); // 
         }
 
         return driver;

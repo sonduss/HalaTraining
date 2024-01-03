@@ -14,13 +14,13 @@ public class AppTest {
 
     @DataProvider(name = "testData")
     public Object[][] provideTestData() {
-        DataReader reader = new DataReader("path/to/your/google/sheet"); // Replace with actual path
+        DataReader reader = new DataReader("https://docs.google.com/spreadsheets/d/15fFLygbcusQYEab1IAxWOe4kNakG9ndyptGYIyF4WQg/edit#gid=0"); 
         return reader.readTestData();
     }
 
     @Test(dataProvider = "testData")
     public void testSignIn(String testCaseId, String username, String password, boolean expectedResult) {
-        WebDriver driver = DriverFactory.createDriver("chrome"); // Replace with desired browser
+        WebDriver driver = DriverFactory.createDriver("chrome"); 
 
         GitHubHomePage homePage = new GitHubHomePage(driver);
         GitHubSignInPage signInPage = homePage.navigateToSignIn();
@@ -32,7 +32,7 @@ public class AppTest {
             Assert.assertTrue(signInPage.isSignInSuccessful(), "Sign-in failed unexpectedly.");
         } else {
             Assert.assertFalse(signInPage.isSignInSuccessful(), "Sign-in succeeded unexpectedly.");
-            Assert.assertEquals(signInPage.getErrorMessage(), "Incorrect username or password."); // Assuming this is the expected error message
+            Assert.assertEquals(signInPage.getErrorMessage(), "Incorrect username or password."); 
         }
 
         // Close the browser
