@@ -9,15 +9,14 @@ public class GitHubHomePage {
     
     }
     private WebDriver driver;
-    private final String signInUrl = "https://github.com/login"; // Replace with the actual sign-in URL
-
+    private final String signInUrl = "https://github.com/login"; 
 
     public GitHubHomePage(WebDriver driver) {
         this.driver = driver;
     }
 
     public GitHubSignInPage navigateToSignIn() {
-        driver.findElement(By.linkText("signInUrl")).click();
+    	driver.get(signInUrl); 
         return new GitHubSignInPage(driver);
     }
 }
