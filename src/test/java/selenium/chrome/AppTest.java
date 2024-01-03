@@ -14,7 +14,7 @@ public class AppTest {
 
     @DataProvider(name = "testData")
     public Object[][] provideTestData() {
-        DataReader reader = new DataReader("https://docs.google.com/spreadsheets/d/15fFLygbcusQYEab1IAxWOe4kNakG9ndyptGYIyF4WQg/edit#gid=0"); 
+        DataReader reader = new DataReader("\"C:\\Users\\MASS\\OneDrive\\Desktop\\QA.xlsx\""); 
         return reader.readTestData();
     }
 
