@@ -1,9 +1,4 @@
 package seleautomation.com.HalaTraining1;
-
-/**
- * Hello world!
- *
- */
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
